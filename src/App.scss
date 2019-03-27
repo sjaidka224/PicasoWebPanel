@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+}
+
+.Login {
+
+}
+
+.DashBoard {
+  button {
+    width: 100%;
+  }
+  .sub-title {
+    border: 1px solid black;
+  }
+
+  .active {
+    background-color: #DB4455;
+    
+  }
+  // table {
+  //   width: 80%;
+  // }
+
+  th, td {
+    padding: 30px;
+  }
+
+  table, td, th {
+    margin: 30px 0;
+    border: 1px solid black;
+  }
+}
+
+.navbar-fixed {
+  nav {
+    background-color: #4B89DC;
+  }
+}
+
+#add {
+  padding: 0 15px;
+}
+

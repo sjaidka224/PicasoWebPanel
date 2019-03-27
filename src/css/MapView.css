@@ -1,0 +1,38 @@
+.rooms {
+    margin: auto;
+
+}
+
+.main_content {
+    display: inline-block;
+    width: 300px;
+}
+
+.rows {
+    margin: 0px;
+}
+
+.room_1_div, .room_2_div{
+    margin: 40px 0px 0px 0px;
+    border: 1px solid black;
+    width: 350px;
+    height: 300px;
+}
+
+.room_3_div, .room_4_div {
+    margin: 0px;
+    border: 1px solid black;
+    width: 350px;
+    height: 175px;
+}
+
+
+.room_5_div {
+    margin: 0px;
+    border: 1px solid black;
+    width: 350px;
+    height: 150px;
+    position: absolute;
+
+}
+
