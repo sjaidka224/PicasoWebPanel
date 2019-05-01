@@ -1,6 +1,6 @@
 // 52.42.152.246:4000
 import axios from 'axios'
-export const BASE_URL = 'http://52.42.15.246:4000/api/v1'
+export const BASE_URL = 'http://52.42.15.246:4000/api/v1';
 
 class API {
   getAllUsers = (stateHandler) => {
@@ -9,21 +9,21 @@ class API {
         stateHandler({
           users: response.data.data
         })
-          console.log("Users");
-          console.log(response.data.data);
+          //console.log("Users");
+          //console.log(response.data.data);
       })
       .catch(error => console.log(error))
-  }
+  };
   
   getUsersActivity = (stateHandler) => {
     axios.get(BASE_URL + '/useractivity')
       .then(response => {
         stateHandler({
-          globalActivity: response.data.data
+          globalActivity: response.data.data.reverse()
         })
       })
       .catch(error => console.log(error))
-  }
+  };
 
   getSelectedUserActivity = (stateHandler, userId) => {
     axios.get(BASE_URL + '/useractivity/' + userId)
@@ -34,11 +34,11 @@ class API {
           globalCounter: (Date.parse(response.data.data[response.data.data.length -1].timestamp) - Date.parse(response.data.data[0].timestamp)),
           activeDeviceId: response.data.data[0].deviceId
         })
-          console.log("getSelectedUserActivity");
-          console.log(response.data.data);
+          //console.log("getSelectedUserActivity");
+          //console.log(response.data.data);
       })
       .catch(error => console.log(error))
-  }
+  };
 
   getAllDevices = (stateHandler) => {
     axios.get(BASE_URL + '/devices')
@@ -48,7 +48,7 @@ class API {
         })
       })
       .catch(error => console.log(error))
-  }
+  };
 }
 
 const instance = new API();

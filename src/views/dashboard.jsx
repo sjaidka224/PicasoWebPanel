@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import API from '../helper/api.js'
 import LoadingComponent from '../components/loading'
 import 'material-icons'
+import moment from "./MapView";
 
 export default class DashBoard extends Component {
   constructor(props) {
@@ -17,17 +18,18 @@ export default class DashBoard extends Component {
       selected: null,
       roomDevices: null,
       timeOutside: 0,
+      currentDate: ""
     };
   }
 
   componentDidMount() {
-    API.getAllUsers(this.stateHandler)
+    API.getAllUsers(this.stateHandler);
     API.getAllDevices(this.stateHandler)
   }
 
   stateHandler = (state) => {
     this.setState(state);
-  }
+  };
 
   setUserActivity = (item) => {
     this.setState({
@@ -35,20 +37,20 @@ export default class DashBoard extends Component {
     }, () => {
       API.getSelectedUserActivity(this.stateHandler, item.userId, this.mapTimerData)
     })
-  }
+  };
   
   calculateDistanceAway = () => {
-    let homeRoom = 0
-    let userActivity = this.state.userActivity.slice()
-    let selectedKey = this.state.key
-    let time = 0
+    let homeRoom = 0;
+    let userActivity = this.state.userActivity.slice();
+    let selectedKey = this.state.key;
+    let time = 0;
     if (selectedKey === 0) {
       time = 0
     }
     else {
       while (userActivity[selectedKey].deviceId !== userActivity[homeRoom].deviceId) {
         time = time + (Date.parse(userActivity[selectedKey + 1].timestamp) - Date.parse(userActivity[selectedKey].timestamp))
-        selectedKey = selectedKey + 1
+        selectedKey = selectedKey + 1;
         console.log(time)
       }
     }
@@ -56,10 +58,17 @@ export default class DashBoard extends Component {
     this.setState({
       timeOutside: time
     })
-  }
+  };
 
   navigateToMapView = () => {
     this.props.history.push('/mapview');
+  };
+
+  changeTimeZones = (timeStamp) => {
+
+    let changedTimeStamp = moment(timeStamp).format('MMMM Do YYYY, h:mm:ss a');
+    return changedTimeStamp;
+
   };
 
   render() {
@@ -160,7 +169,9 @@ export default class DashBoard extends Component {
                               <td>
                                 <a href="#!" onClick={() => this.setState({ selected: object, activeDeviceId: object.deviceId, key: key }, () => this.calculateDistanceAway())}>{object.deviceId}</a>
                               </td>
-                              <td>{object.timestamp}</td>
+                              <td>
+                                {object.timestamp}
+                              </td>
                             </tr>
                           )
                         })
